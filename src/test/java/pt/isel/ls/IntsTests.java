@@ -1,6 +1,7 @@
 package pt.isel.ls;
 
 import org.junit.Test;
+import pt.isel.ls.Ints;
 
 import java.util.Arrays;
 
@@ -12,7 +13,8 @@ import static org.junit.Assert.assertTrue;
 public class IntsTests {
 
     private static boolean isNonDecreasingOrder(int[] a, int l, int r) {
-        for (int i = l; i < r; i++)
+
+        for (int i = l; i < r - 1; i++)
             if (a[i] > a[i+1])
                 return false;
         return true;
