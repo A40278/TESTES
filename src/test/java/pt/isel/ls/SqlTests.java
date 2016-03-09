@@ -48,5 +48,17 @@ public class SqlTests {
         prep.executeUpdate();
         con.close();
     }
+    @Test
+    public void test_delete() throws SQLException{
+        SQLServerDataSource dataSource = new SQLServerDataSource();
+        dataSource.setServerName(System.getenv("LS_DB_SRV"));
+        dataSource.setUser(System.getenv("LS_DB_USER"));
+        dataSource.setPassword(System.getenv("LS_DB_PW"));
+        dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
 
+        Connection con = dataSource.getConnection();
+        String str = "DELETE FROM STUDENTS WHERE name = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(str);
+        //preparedStatement.setString(new Student("Eu",21,414141,"M").getName());
+    }
 }
