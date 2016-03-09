@@ -36,31 +36,23 @@ public class AppTest {
         }
 
     }
-    public static void testInsert(){
+    public static boolean testInsert(Student student){
         try {
             Connection con = DriverManager.getConnection(getUrl());
             String str = "INSERT INTO STUDENTS VALUES(?,?,?,?)";
             PreparedStatement preparedStatement = con.prepareStatement(str);
-            Scanner s = new Scanner(System.in);
-            System.out.println("Student number ? > ");
-            int number = s.nextInt();
 
-            System.out.println("Student name ? > ");
-            String name = s.nextLine() + s.nextLine();
-            System.out.println("Student age ? > ");
-            int age = s.nextInt();
-            System.out.println("Student gender ? > ");
-            String gender = s.nextLine() + s.nextLine();
-            preparedStatement.setInt(1,number);
-            preparedStatement.setString(2,name);
-            preparedStatement.setInt(3,age);
-            preparedStatement.setString(4,gender);
+            preparedStatement.setInt(1,student.getNumber());
+            preparedStatement.setString(2,student.getName());
+            preparedStatement.setInt(3,student.getAge());
+            preparedStatement.setString(4,student.getGender());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             con.close();
-            System.out.println("Done inserting!!");
+            return true;
         }catch (SQLException e){
             e.printStackTrace();
+            return false;
         }
     }
     public static void testSelect(){

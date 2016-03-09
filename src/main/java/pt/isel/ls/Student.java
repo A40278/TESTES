@@ -6,8 +6,8 @@ package pt.isel.ls;
 public class Student {
     private String name;
     private int age, number;
-    private char gender;
-    public Student(String name,int age, int number, char gender){
+    private String gender;
+    public Student(String name,int age, int number,String gender){
         this.name = name;
         this.age = age;
         this.number = number;
@@ -24,7 +24,7 @@ public class Student {
     public int getNumber(){
         return number;
     }
-    public char getGender(){
+    public String getGender(){
         return gender;
     }
 }

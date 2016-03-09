@@ -19,5 +19,9 @@ public class SqlTests {
         }
         assertTrue(b);
     }
-
+    @Test
+    public void testInsert(){
+        Student std = new Student("William",30,12345,"M");
+        assertTrue(AppTest.testInsert(std));
+    }
 }
