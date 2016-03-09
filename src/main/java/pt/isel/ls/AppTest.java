@@ -1,19 +1,37 @@
 package pt.isel.ls;
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.sql.*;
 import java.util.Scanner;
 
 /**
- * Created by EduW on 09/03/2016.
+     Nome das variáveis:
+     LS_DB_NAME
+     LS_DB_PW
+     LS_DB_USER
+     LS_DB_SRV
  */
 public class AppTest {
 
     public static void main(String[] arg) {
 
-        String url = "jdbc:sqlserver://localhost:1433;user=walter;password=lebronjames;databaseName=LSTest";
+        SQLServerDataSource dataSource = new SQLServerDataSource();
+        dataSource.setServerName(System.getenv("LS_DB_SRV"));
+        dataSource.setUser(System.getenv("LS_DB_USER"));
+        dataSource.setPassword(System.getenv("LS_DB_PW"));
+        dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
+        try {
+            Connection con = dataSource.getConnection();
+            System.out.println("Done");
+        } catch (SQLServerException e) {
+            e.printStackTrace();
+        }
         //testInsert();
         //testSelect();
         //upDateAge("Lebron James",31);
         //testDelete("Edu Jorge");
+
     }
     public static String getUrl(){
         return "jdbc:sqlserver://localhost:1433;user=walter;password=lebronjames;databaseName=LSTest";
@@ -45,7 +63,7 @@ public class AppTest {
             preparedStatement.setInt(1,student.getNumber());
             preparedStatement.setString(2,student.getName());
             preparedStatement.setInt(3,student.getAge());
-            preparedStatement.setString(4,student.getGender());
+            preparedStatement.setString(4, student.getGender());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             con.close();

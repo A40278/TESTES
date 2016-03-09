@@ -14,7 +14,7 @@ public class IntsTests {
 
     private static boolean isNonDecreasingOrder(int[] a, int l, int r) {
 
-        for (int i = l; i < r - 1; i++)
+        for (int i = l; i < r; i++)
             if (a[i] > a[i+1])
                 return false;
         return true;
@@ -82,4 +82,6 @@ public class IntsTests {
         // Assert
         assertTrue(isNonDecreasingOrder(values, 2, 5));
     }
+
+
 }
