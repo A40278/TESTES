@@ -1,4 +1,0 @@
-teste
-git add teste.txt
-git commit -m "criei teste.txt"
-git push origin master
