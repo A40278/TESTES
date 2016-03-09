@@ -8,20 +8,8 @@ import java.sql.*;
 public class SqlTests {
 
     @Test
-    public void testCon(){
-        boolean b = true;
-        String url = AppTest.getUrl();
-        try {
-            Connection con = DriverManager.getConnection(url);
-            con.close();
-        } catch (SQLException e) {
-            b = false;
-        }
-        assertTrue(b);
-    }
-    @Test
     public void testInsert(){
         Student std = new Student("William",30,12345,"M");
-        assertTrue(AppTest.testInsert(std));
+
     }
 }
