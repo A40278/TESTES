@@ -29,7 +29,7 @@ public class SqlTests {
         Student std = new Student("William",30,12345,"M");
 
         PreparedStatement prep = con.prepareStatement(upd);
-        prep.setInt(1, std.getAge());
+        prep.setInt(1, 20);
         prep.setString(2, std.getName());
         prep.executeUpdate();
         con.close();
