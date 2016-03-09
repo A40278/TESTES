@@ -14,7 +14,7 @@ public class IntsTests {
 
     private static boolean isNonDecreasingOrder(int[] a, int l, int r) {
 
-        for (int i = l; i < r; i++)
+        for (int i = l; i < r - 1; i++)
             if (a[i] > a[i+1])
                 return false;
         return true;
@@ -68,19 +68,22 @@ public class IntsTests {
         // Arrange
         int[] values = {-20,4,-1,2,1,0,10};
         // Act
-        Ints.insertionSort(values, 0, values.length-1);
-        // Assert
-        assertTrue(isNonDecreasingOrder(values, 0, values.length-1));
-    }
-
-    @Test
-    public void sorts_a_sub_range_of_a_small_array() {
-        // Arrange
-        int[] values = {-20,4,-1,2,1,0,10};
-        // Act
         Ints.insertionSort(values, 2, 5);
         // Assert
         assertTrue(isNonDecreasingOrder(values, 2, 5));
+    }
+
+    @Test
+    public void prof() {
+        // Arrange
+        int[] values = {20,4,-1,2,1,0,10};
+
+        // Act
+        Ints.insertionSort(values, 0, values.length - 1);
+        for(int i = 0; i< values.length;i++)
+            System.out.print(values[i] + ", ");
+        // Assert
+        assertTrue(isNonDecreasingOrder(values,0, values.length - 1));
     }
 
 
