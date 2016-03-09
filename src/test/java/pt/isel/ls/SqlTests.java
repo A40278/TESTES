@@ -61,4 +61,23 @@ public class SqlTests {
         PreparedStatement preparedStatement = con.prepareStatement(str);
         //preparedStatement.setString(new Student("Eu",21,414141,"M").getName());
     }
+
+    @Test
+    public void test_select() throws SQLException{
+        SQLServerDataSource dataSource = new SQLServerDataSource();
+        dataSource.setServerName(System.getenv("LS_DB_SRV"));
+        dataSource.setUser(System.getenv("LS_DB_USER"));
+        dataSource.setPassword(System.getenv("LS_DB_PW"));
+        dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
+
+        Connection con = dataSource.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS");
+        while(rs.next()){
+            System.out.print("Student Number " +rs.getInt(1) + " Name " +rs.getString(2)
+            + " Age " + rs.getInt(3) + " Gender " + rs.getString(4));
+        }
+        stmt.close();
+        con.close();
+    }
 }
