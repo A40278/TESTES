@@ -28,4 +28,25 @@ public class SqlTests {
         preparedStatement.executeUpdate();
         con.close();
     }
+
+    @Test
+    public void testUpdate() throws SQLException {
+        SQLServerDataSource dataSource = new SQLServerDataSource();
+        dataSource.setServerName(System.getenv("LS_DB_SRV"));
+        dataSource.setUser(System.getenv("LS_DB_USER"));
+        dataSource.setPassword(System.getenv("LS_DB_PW"));
+        dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
+
+        Connection con = dataSource.getConnection();
+
+        String upd = "UPDATE Students SET idade=? WHERE nome=?";
+        Student std = new Student("William",30,12345,"M");
+
+        PreparedStatement prep = con.prepareStatement(upd);
+        prep.setInt(1, 20);
+        prep.setString(2, std.getName());
+        prep.executeUpdate();
+        con.close();
+    }
+
 }
