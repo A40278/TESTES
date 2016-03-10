@@ -74,7 +74,7 @@ public class SqlTests {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS");
         while(rs.next()){
-            System.out.print("Student Number " +rs.getInt(1) + " Name " +rs.getString(2)
+            System.out.println("Student Number " +rs.getInt(1) + " Name " +rs.getString(2)
             + " Age " + rs.getInt(3) + " Gender " + rs.getString(4));
         }
         stmt.close();
