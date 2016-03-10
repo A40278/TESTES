@@ -23,7 +23,7 @@ public class AppTest {
         dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
         try {
             Connection con = dataSource.getConnection();
-            System.out.println("Done");
+            System.out.println("Connected");
         } catch (SQLServerException e) {
             e.printStackTrace();
         }
