@@ -63,7 +63,7 @@ public class SqlTests {
     }
 
     @Test
-    public void test_select() throws SQLException{
+    public void testSelect() throws SQLException{
         SQLServerDataSource dataSource = new SQLServerDataSource();
         dataSource.setServerName(System.getenv("LS_DB_SRV"));
         dataSource.setUser(System.getenv("LS_DB_USER"));
@@ -72,11 +72,27 @@ public class SqlTests {
 
         Connection con = dataSource.getConnection();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS ");
         while(rs.next()){
             System.out.println("Student Number " +rs.getInt(1) + " Name " +rs.getString(2)
             + " Age " + rs.getInt(3) + " Gender " + rs.getString(4));
         }
+
+        rs = stmt.executeQuery("SELECT MAX(number) FROM STUDENTS");
+        while(rs.next()){
+            System.out.println("Biggest Number is= "+rs.getInt(1));
+        }
+
+        rs = stmt.executeQuery("SELECT MIN(number) FROM STUDENTS");
+        while(rs.next()){
+            System.out.println("Smallest Number is= "+rs.getInt(1));
+        }
+
+        rs = stmt.executeQuery("SELECT AVG(number) FROM STUDENTS");
+        while(rs.next()){
+            System.out.println("Average Number is= "+rs.getInt(1));
+        }
+
         stmt.close();
         con.close();
     }
