@@ -3,7 +3,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
-import java.util.Scanner;
+
 
 /**
      Nome das variáveis:

@@ -1,6 +1,5 @@
 package pt.isel.ls;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -109,35 +108,31 @@ public class SqlTests {
 
     @Test
     public void testSelect() throws SQLException{
-        SQLServerDataSource dataSource = new SQLServerDataSource();
-        dataSource.setServerName(System.getenv("LS_DB_SRV"));
-        dataSource.setUser(System.getenv("LS_DB_USER"));
-        dataSource.setPassword(System.getenv("LS_DB_PW"));
-        dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
 
-        Connection con = dataSource.getConnection();
+
+        Connection con = getCon();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS ");
         while(rs.next()){
-            System.out.println("Student Number " +rs.getInt(1) + " Name " +rs.getString(2)
-            + " Age " + rs.getInt(3) + " Gender " + rs.getString(4));
+            System.out.println("Student Number: " +rs.getInt(1) + " Name: " +rs.getString(2)
+            + " Age: " + rs.getInt(3) + " Gender: " + rs.getString(4));
         }
-
-        rs = stmt.executeQuery("SELECT MAX(number) FROM STUDENTS");
+        System.out.println("---------------------------------------------------------");
+        rs = stmt.executeQuery("SELECT MAX(nAluno) FROM STUDENTS");
         while(rs.next()){
-            System.out.println("Biggest Number is= "+rs.getInt(1));
+            System.out.println("Biggest Number is = "+rs.getInt(1));
         }
-
-        rs = stmt.executeQuery("SELECT MIN(number) FROM STUDENTS");
+        System.out.println("---------------------------------------------------------");
+        rs = stmt.executeQuery("SELECT MIN(nAluno) FROM STUDENTS");
         while(rs.next()){
-            System.out.println("Smallest Number is= "+rs.getInt(1));
+            System.out.println("Smallest Number is = "+rs.getInt(1));
         }
-
-        rs = stmt.executeQuery("SELECT AVG(number) FROM STUDENTS");
+        System.out.println("---------------------------------------------------------");
+        rs = stmt.executeQuery("SELECT AVG(nAluno) FROM STUDENTS");
         while(rs.next()){
-            System.out.println("Average Number is= "+rs.getInt(1));
+            System.out.println("Average Number is = "+rs.getInt(1));
         }
-
+        System.out.println();
         stmt.close();
         con.close();
     }

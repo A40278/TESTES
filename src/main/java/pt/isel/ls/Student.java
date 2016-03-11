@@ -1,10 +1,5 @@
 package pt.isel.ls;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 /**
  * Created by EduW on 09/03/2016.
  */
