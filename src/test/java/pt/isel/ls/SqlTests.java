@@ -129,9 +129,14 @@ public class SqlTests {
             System.out.println("Smallest Number is = "+rs.getInt(1));
         }
         System.out.println("---------------------------------------------------------");
-        rs = stmt.executeQuery("SELECT AVG(nAluno) FROM STUDENTS");
+        rs = stmt.executeQuery("SELECT AVG(idade) FROM STUDENTS");
         while(rs.next()){
-            System.out.println("Average Number is = "+rs.getInt(1));
+            System.out.println("Average Age is = "+rs.getInt(1));
+        }
+        System.out.println("---------------------------------------------------------");
+        rs = stmt.executeQuery("SELECT COUNT(nAluno) FROM STUDENTS WHERE idade>(SELECT AVG(idade) FROM STUDENTS)");
+        while(rs.next()){
+            System.out.println("The number of studens  is = "+rs.getInt(1));
         }
         System.out.println();
         stmt.close();
