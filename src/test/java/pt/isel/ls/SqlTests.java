@@ -14,13 +14,14 @@ public class SqlTests {
      * @return Connection to be used in the calling method.
      * @throws SQLException Dealing with SQLServerDataSource might throw an exception.
      */
-    private static Connection getCon() throws SQLException{
-        SQLServerDataSource dataSource = new SQLServerDataSource();
+
+    private static SQLServerDataSource dataSource = null;
+    static{
+        dataSource = new SQLServerDataSource();
         dataSource.setServerName(System.getenv("LS_DB_SRV"));
         dataSource.setUser(System.getenv("LS_DB_USER"));
         dataSource.setPassword(System.getenv("LS_DB_PW"));
         dataSource.setDatabaseName(System.getenv("LS_DB_NAME"));
-        return dataSource.getConnection();
     }
 
     /**
@@ -31,7 +32,7 @@ public class SqlTests {
      * @throws SQLException Dealing with Connections and PreparedStatements might throw an exception.
      */
     private boolean exists(Student std) throws SQLException {
-        Connection con = getCon();
+        Connection con = dataSource.getConnection();
         PreparedStatement pstmt = con.prepareStatement("SELECT nome FROM STUDENTS WHERE nAluno = ?");
         PreparedStatement delStmt = con.prepareStatement("DELETE FROM Students WHERE nAluno = ?");
         pstmt.setInt(1, std.getNumber());
@@ -48,7 +49,7 @@ public class SqlTests {
     @Test
     public void testInsert() throws SQLException{
 
-        Connection con = getCon();
+        Connection con = dataSource.getConnection();
         String str = "INSERT INTO Students VALUES (?,?,?,?)";
         PreparedStatement preparedStatement = con.prepareStatement(str);
         Student std = new Student("TestingName",55,(int)(Math.random()*100),"M");
@@ -64,7 +65,7 @@ public class SqlTests {
     @Test
     public void testUpdate() throws SQLException {
 
-        Connection con = getCon();
+        Connection con = dataSource.getConnection();
         String upd = "UPDATE Students SET idade=? WHERE nome=?";
         Student std = new Student("William",30,12345,"M");
 
@@ -77,7 +78,7 @@ public class SqlTests {
     @Test
     public void test_delete() throws SQLException{
 
-        Connection con = getCon();
+        Connection con = dataSource.getConnection();
         String str = "DELETE FROM STUDENTS WHERE nome = ?";
         PreparedStatement preparedStatement = con.prepareStatement(str);
 
@@ -95,7 +96,7 @@ public class SqlTests {
      * @throws SQLException Connection or PreparedStatement objects might throw an SQLException.
      */
     private void insert(Student in) throws SQLException{
-        Connection con = getCon();
+        Connection con = dataSource.getConnection();
         String str = "INSERT INTO Students VALUES (?,?,?,?)";
         PreparedStatement preparedStatement = con.prepareStatement(str);
         preparedStatement.setInt(1, in.getNumber());
@@ -110,7 +111,7 @@ public class SqlTests {
     public void testSelect() throws SQLException{
 
 
-        Connection con = getCon();
+        Connection con = dataSource.getConnection();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM STUDENTS ");
         while(rs.next()){
