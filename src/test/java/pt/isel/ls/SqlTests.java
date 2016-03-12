@@ -136,7 +136,7 @@ public class SqlTests {
         System.out.println("---------------------------------------------------------");
         rs = stmt.executeQuery("SELECT COUNT(nAluno) FROM STUDENTS WHERE idade>(SELECT AVG(idade) FROM STUDENTS)");
         while(rs.next()){
-            System.out.println("The number of studens  is = "+rs.getInt(1));
+            System.out.println("The number of studens older than average is = "+rs.getInt(1));
         }
         System.out.println();
         stmt.close();
